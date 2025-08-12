@@ -1,26 +1,24 @@
 package com.possystem.POS_System.dto;
 
-import com.possystem.POS_System.entity.CustomerContactNumber;
-import jakarta.persistence.Column;
-import jakarta.persistence.OneToMany;
-import org.hibernate.annotations.ColumnDefault;
+import lombok.Data;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
+@Data
 public class CustomerDTO {
     private Integer id;
-    private Byte activeState;
+    private Boolean activeState;
     private String customerAddress;
     private String customerName;
     private Double customerSalary;
     private String nic;
-    private Set<CustomerContactNumber> customerContactNumbers = new LinkedHashSet<>();
+    private List<CustomerContactNumberDTO> customerContactNumbers = new ArrayList();
 
     public CustomerDTO() {
     }
 
-    public CustomerDTO(Integer id, Byte activeState, String customerAddress, String customerName, Double customerSalary, String nic, Set<CustomerContactNumber> customerContactNumbers) {
+    public CustomerDTO(Integer id, Boolean activeState, String customerAddress, String customerName, Double customerSalary, String nic, List<CustomerContactNumberDTO> customerContactNumbers) {
         this.id = id;
         this.activeState = activeState;
         this.customerAddress = customerAddress;
@@ -30,72 +28,73 @@ public class CustomerDTO {
         this.customerContactNumbers = customerContactNumbers;
     }
 
-    public Set<CustomerContactNumber> getCustomerContactNumbers() {
-        return customerContactNumbers;
-    }
 
-    public void setCustomerContactNumbers(Set<CustomerContactNumber> customerContactNumbers) {
-        this.customerContactNumbers = customerContactNumbers;
-    }
-
-    public String getNic() {
-        return nic;
-    }
-
-    public void setNic(String nic) {
-        this.nic = nic;
-    }
-
-    public Double getCustomerSalary() {
-        return customerSalary;
-    }
-
-    public void setCustomerSalary(Double customerSalary) {
-        this.customerSalary = customerSalary;
-    }
-
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-
-    public String getCustomerAddress() {
-        return customerAddress;
-    }
-
-    public void setCustomerAddress(String customerAddress) {
-        this.customerAddress = customerAddress;
-    }
-
-    public Byte getActiveState() {
-        return activeState;
-    }
-
-    public void setActiveState(Byte activeState) {
-        this.activeState = activeState;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+//    public Integer getId() {
+//        return id;
+//    }
+//
+//    public void setId(Integer id) {
+//        this.id = id;
+//    }
+//
+//    public Boolean getActiveState() {
+//        return activeState;
+//    }
+//
+//    public void setActiveState(Boolean activeState) {
+//        this.activeState = activeState;
+//    }
+//
+//    public String getCustomerAddress() {
+//        return customerAddress;
+//    }
+//
+//    public void setCustomerAddress(String customerAddress) {
+//        this.customerAddress = customerAddress;
+//    }
+//
+//    public String getCustomerName() {
+//        return customerName;
+//    }
+//
+//    public void setCustomerName(String customerName) {
+//        this.customerName = customerName;
+//    }
+//
+//    public Double getCustomerSalary() {
+//        return customerSalary;
+//    }
+//
+//    public void setCustomerSalary(Double customerSalary) {
+//        this.customerSalary = customerSalary;
+//    }
+//
+//    public String getNic() {
+//        return nic;
+//    }
+//
+//    public void setNic(String nic) {
+//        this.nic = nic;
+//    }
+//
+//    public List<CustomerContactNumberDTO> getCustomerContactNumberDTOs() {
+//        return customerContactNumbers;
+//    }
+//
+//    public void setCustomerContactNumberDTOs(List<CustomerContactNumberDTO> customerContactNumbers) {
+//        this.customerContactNumbers = customerContactNumbers;
+//    }
 
     @Override
     public String toString() {
         return "CustomerDTO{" +
                 "id=" + id +
                 ", activeState=" + activeState +
-                ", customerAddress=" + customerAddress +
+                ", customerAddress='" + customerAddress + '\'' +
                 ", customerName='" + customerName + '\'' +
                 ", customerSalary=" + customerSalary +
                 ", nic='" + nic + '\'' +
-                ", customerContactNumbers=" + customerContactNumbers +
+                //", customerContactNumbers=" + customerContactNumbers +
                 '}';
     }
 }

@@ -1,31 +1,32 @@
 package com.possystem.POS_System.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @Entity
 @Table(name = "customer_contact_numbers")
 public class CustomerContactNumber {
 
-    @Id
+    @Id//not null unique
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "customer_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_customer_id")
+    @JsonBackReference
     private Customer customer;
 
     @Column(name = "contact_number", nullable = false, length = 15)
     private String contactNumber;
 
-//    public CustomerContactNumber() {
-//    }
+    public CustomerContactNumber() {
+    }
 
     public CustomerContactNumber(Integer id, Customer customer, String contactNumber) {
         this.id = id;
@@ -41,13 +42,6 @@ public class CustomerContactNumber {
         this.id = id;
     }
 
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
 
     public String getContactNumber() {
         return contactNumber;

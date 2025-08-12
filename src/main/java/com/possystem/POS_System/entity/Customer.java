@@ -1,11 +1,14 @@
 package com.possystem.POS_System.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -20,7 +23,7 @@ public class Customer {
 
     @ColumnDefault("0")
     @Column(name = "active_state")
-    private Byte activeState;
+    private Boolean activeState;
 
     @Column(name = "customer_address", length = 255)
     private String customerAddress;
@@ -28,27 +31,39 @@ public class Customer {
     @Column(name = "customer_name", length = 100)
     private String customerName;
 
-    @Column(name = "customer_salary",  length = 100)
+    @Column(name = "customer_salary", length = 100)
     private Double customerSalary;
 
     @Column(name = "nic")
     private String nic;
 
     @OneToMany(mappedBy = "customer")
-    private Set<CustomerContactNumber> customerContactNumbers = new LinkedHashSet<>();
+    @JsonManagedReference
+    private List<CustomerContactNumber>  customerContactNumbers = new ArrayList();
 
-    public Customer()  {
+    public Customer() {
     }
 
-    public Customer(Integer id, Byte activeState, String customerAddress, String customerName, Double customerSalary, String nic, Set<CustomerContactNumber> customerContactNumbers) {
+    public Customer(Integer id, Boolean activeState, String customerAddress, String customerName, Double customerSalary, String nic) {
         this.id = id;
         this.activeState = activeState;
         this.customerAddress = customerAddress;
         this.customerName = customerName;
         this.customerSalary = customerSalary;
         this.nic = nic;
-        this.customerContactNumbers = customerContactNumbers;
+        //this.customerContactNumbers = customerContactNumbers;
     }
+
+//    public Customer(Integer id, Byte activeState, String customerAddress, String customerName, Double customerSalary, String nic, List<CustomerContactNumber> customerContactNumbers) {
+//        this.id = id;
+//        this.activeState = activeState;
+//        this.customerAddress = customerAddress;
+//        this.customerName = customerName;
+//        this.customerSalary = customerSalary;
+//        this.nic = nic;
+//        this.customerContactNumbers = customerContactNumbers;
+//    }
+
 
     public Integer getId() {
         return id;
@@ -58,11 +73,11 @@ public class Customer {
         this.id = id;
     }
 
-    public Byte getActiveState() {
+    public Boolean getActiveState() {
         return activeState;
     }
 
-    public void setActiveState(Byte activeState) {
+    public void setActiveState(Boolean activeState) {
         this.activeState = activeState;
     }
 
@@ -98,11 +113,11 @@ public class Customer {
         this.nic = nic;
     }
 
-    public Set<CustomerContactNumber> getCustomerContactNumbers() {
+    public List<CustomerContactNumber> getCustomerContactNumbers() {
         return customerContactNumbers;
     }
 
-    public void setCustomerContactNumbers(Set<CustomerContactNumber> customerContactNumbers) {
+    public void setCustomerContactNumbers(List<CustomerContactNumber> customerContactNumbers) {
         this.customerContactNumbers = customerContactNumbers;
     }
 
@@ -111,11 +126,11 @@ public class Customer {
         return "Customer{" +
                 "id=" + id +
                 ", activeState=" + activeState +
-                ", customerAddress=" + customerAddress +
+                ", customerAddress='" + customerAddress + '\'' +
                 ", customerName='" + customerName + '\'' +
                 ", customerSalary=" + customerSalary +
                 ", nic='" + nic + '\'' +
-                ", customerContactNumbers=" + customerContactNumbers +
+                //", customerContactNumbers=" + customerContactNumbers +
                 '}';
     }
 }
