@@ -14,7 +14,7 @@ public class CustomerContactNumberDTO {
     public CustomerContactNumberDTO() {
     }
 
-    public CustomerContactNumberDTO(Integer id, Customer customer, String contactNumber) {
+    public CustomerContactNumberDTO(Integer id,  String contactNumber) {
         this.id = id;
         //this.customer = customer;
         this.contactNumber = contactNumber;
